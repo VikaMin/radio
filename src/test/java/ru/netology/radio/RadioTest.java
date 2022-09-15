@@ -10,7 +10,6 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/diapason.csv")
 
-    @Test
     public void nextTest(int value, int result) {
         Radio radio = new Radio();
         radio.setCorrentStation(value);
@@ -25,7 +24,6 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/diapasonPrev.csv")
 
-    @Test
     public void prevTest(int value, int result) {
         Radio radio = new Radio();
         radio.setCorrentStation(value);
@@ -40,7 +38,6 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/increaseVolume.csv")
 
-    @Test
     public void increaseVolumeTest(int value, int result) {
         Radio radio = new Radio();
         radio.setCorrentVolume(value);
@@ -55,7 +52,6 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/decreaseVolume.csv")
 
-    @Test
     public void decreaseVolumeTest(int value, int result) {
         Radio radio = new Radio();
         radio.setCorrentVolume(value);
