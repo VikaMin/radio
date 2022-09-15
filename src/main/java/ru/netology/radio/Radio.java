@@ -24,7 +24,7 @@ public class Radio {
     public void next() {
         if (correntStation == 9) {
             correntStation = 0;
-        } else{
+        } else {
             correntStation++;
         }
     }
@@ -32,9 +32,25 @@ public class Radio {
     public void prev() {
         if (correntStation == 0) {
             correntStation = 9;
-        } else{
+        } else {
             correntStation--;
         }
+    }
+
+    public int getCorrentVolume() {
+        return correntVolume;
+    }
+
+    public void setCorrentVolume(int correntVolume) {
+        if (correntVolume < 0) {
+            return;
+        }
+
+        if (correntVolume > 10) {
+            return;
+        }
+
+        this.correntVolume = correntVolume;
     }
 
     public void increaseVolume() {
