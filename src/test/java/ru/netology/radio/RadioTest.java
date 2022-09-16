@@ -1,11 +1,24 @@
 package ru.netology.radio;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class RadioTest {
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/shouldSetCorrentStation.csv")
+
+    public void setCorrentStation(int vale, int result) {
+        Radio radio = new Radio();
+        radio.setCorrentStation(vale);
+
+        int expected = result;
+        int actual = radio.getCorrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/diapason.csv")
@@ -31,6 +44,19 @@ public class RadioTest {
 
         int expected = result;
         int actual = radio.getCorrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/setCorrentVolume.csv")
+
+    public void setCorrentVolume(int vale, int result) {
+        Radio radio = new Radio();
+        radio.setCorrentVolume(vale);
+
+        int expected = result;
+        int actual = radio.getCorrentVolume();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -62,5 +88,6 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
 
 }
