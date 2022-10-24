@@ -1,93 +1,108 @@
 package ru.netology.radio;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
+    Radio radio = new Radio();
 
-    @ParameterizedTest
-    @CsvFileSource(files = "src/test/resources/shouldSetCorrentStation.csv")
+    @Test
+    public void testRadio() {
 
-    public void setCorrentStation(int vale, int result) {
-        Radio radio = new Radio();
-        radio.setCorrentStation(vale);
-
-        int expected = result;
-        int actual = radio.getCorrentStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(10, radio.getAmountStation());
     }
 
+    @Test
+    public void setRadio() {
 
-    @ParameterizedTest
-    @CsvFileSource(files = "src/test/resources/diapason.csv")
+        Radio radio30 = new Radio(30);
 
-    public void nextTest(int value, int result) {
-        Radio radio = new Radio();
-        radio.setCorrentStation(value);
-        radio.next();
+        Assertions.assertEquals(30, radio30.getAmountStation());
 
-        int expected = result;
-        int actual = radio.getCorrentStation();
-
-        Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvFileSource(files = "src/test/resources/diapasonPrev.csv")
+    @CsvFileSource(files = "src/test/resources/RadioStation.csv")
+    public void shouldSetRadioStation(int currentRadioStation, int expected) {
 
-    public void prevTest(int value, int result) {
-        Radio radio = new Radio();
-        radio.setCorrentStation(value);
-        radio.prev();
+        radio.setCurrentStation(currentRadioStation);
 
-        int expected = result;
-        int actual = radio.getCorrentStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, radio.getCurrentStation());
     }
 
     @ParameterizedTest
-    @CsvFileSource(files = "src/test/resources/setCorrentVolume.csv")
+    @CsvFileSource(files = "src/test/resources/Volume.csv")
+    public void shouldSetVolume(int currentVolume, int expected) {
 
-    public void setCorrentVolume(int vale, int result) {
-        Radio radio = new Radio();
-        radio.setCorrentVolume(vale);
+        radio.setCurrentVolume(currentVolume);
 
-        int expected = result;
-        int actual = radio.getCorrentVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, radio.getCurrentVolume());
     }
 
     @ParameterizedTest
-    @CsvFileSource(files = "src/test/resources/increaseVolume.csv")
+    @CsvSource({
+            "0,1",
+            "4,5",
+            "9,0"
+    })
+    public void shouldNextStation(int currentRadioStation, int expected) {
 
-    public void increaseVolumeTest(int value, int result) {
-        Radio radio = new Radio();
-        radio.setCorrentVolume(value);
+        radio.setCurrentStation(currentRadioStation);
+
+        radio.nextStation();
+
+        Assertions.assertEquals(expected, radio.getCurrentStation());
+
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "9,8",
+            "5,4",
+            "0,9"
+    })
+    public void shouldPrevStation(int currentRadioStation, int expected) {
+
+        radio.setCurrentStation(currentRadioStation);
+
+        radio.prevStation();
+
+        Assertions.assertEquals(expected, radio.getCurrentStation());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0,1",
+            "99,100",
+            "100,100"
+
+    })
+    public void shouldIncreaseVolume(int currentVolume, int expected) {
+
+        radio.setCurrentVolume(currentVolume);
+
         radio.increaseVolume();
 
-        int expected = result;
-        int actual = radio.getCorrentVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, radio.getCurrentVolume());
     }
 
     @ParameterizedTest
-    @CsvFileSource(files = "src/test/resources/decreaseVolume.csv")
+    @CsvSource({
+            "100,99",
+            "1,0",
+            "0,0"
 
-    public void decreaseVolumeTest(int value, int result) {
-        Radio radio = new Radio();
-        radio.setCorrentVolume(value);
-        radio.decreaseVolume();
+    })
+    public void shouldReduceVolume(int currentVolume, int expected) {
 
-        int expected = result;
-        int actual = radio.getCorrentVolume();
+        radio.setCurrentVolume(currentVolume);
 
-        Assertions.assertEquals(expected, actual);
+        radio.reduceVolume();
+
+        Assertions.assertEquals(expected, radio.getCurrentVolume());
     }
-
 
 }

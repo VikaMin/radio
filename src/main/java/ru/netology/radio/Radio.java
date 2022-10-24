@@ -2,67 +2,63 @@ package ru.netology.radio;
 
 public class Radio {
 
-    private int correntStation;
-    private int correntVolume;
+    private int currentStation;
+    private int amountStation = 10;
+    private int currentVolume;
 
-    public int getCorrentStation() {
-        return correntStation;
+    public Radio() {
     }
 
-    public void setCorrentStation(int correntStation) {
-        if (correntStation < 0) {
-            return;
-        }
-
-        if (correntStation > 9) {
-            return;
-        }
-
-        this.correntStation = correntStation;
+    public Radio(int amountStation) {
+        this.amountStation = amountStation;
+    }
+    public int getCurrentStation() {
+        return currentStation;
     }
 
-    public void next() {
-        if (correntStation == 9) {
-            correntStation = 0;
-        } else {
-            correntStation++;
-        }
+    public int getCurrentVolume() {
+        return currentVolume;
     }
 
-    public void prev() {
-        if (correntStation == 0) {
-            correntStation = 9;
-        } else {
-            correntStation--;
+    public int getAmountStation() {
+        return amountStation;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume >= 0 & currentVolume <= 100) {
+            this.currentVolume = currentVolume;
         }
     }
 
-    public int getCorrentVolume() {
-        return correntVolume;
-    }
-
-    public void setCorrentVolume(int correntVolume) {
-        if (correntVolume < 0) {
-            return;
+    public void setCurrentStation(int currentStation) {
+        if (currentStation >= 0 & currentStation < amountStation) {
+            this.currentStation = currentStation;
         }
-
-        if (correntVolume > 10) {
-            return;
-        }
-
-        this.correntVolume = correntVolume;
     }
 
     public void increaseVolume() {
-        if (correntVolume < 10) {
-            correntVolume++;
+        if (currentVolume < 100) {
+            currentVolume += 1;
         }
     }
 
-    public void decreaseVolume() {
-        if (correntVolume > 0) {
-            correntVolume--;
+    public void reduceVolume() {
+        if (currentVolume > 0) {
+            currentVolume -= 1;
         }
+    }
+
+    public void nextStation() {
+        if (currentStation == amountStation - 1) {
+            currentStation = 0;
+        } else currentStation += 1;
+    }
+
+
+    public void prevStation() {
+        if (currentStation == 0) {
+            currentStation = amountStation - 1;
+        } else currentStation -= 1;
     }
 
 }
